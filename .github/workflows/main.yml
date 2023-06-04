@@ -36,5 +36,5 @@ jobs:
           username: ${{ secrets.REMOTE_USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           # 拷贝 .next、public文件夹和package.json文件到服务器指定目录
-          source: '.vitePress/dist'
+          source: '.vitepress/dist'
           target: '/data/siteWeb3'
