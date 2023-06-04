@@ -36,4 +36,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           REMOTE_USER: ${{ secrets.REMOTE_USERNAME }}
           SOURCE: '.vitepress/dist'
-          TARGET: '/data/siteWeb3'
+          TARGET: '/data/website'
