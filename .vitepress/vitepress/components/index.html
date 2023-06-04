@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Square Animation</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        .borderShow {
+            width: 150px;
+            height: 70px;
+            margin: 30px;
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                width: calc(100% - 4px - 12px);
+                height: calc(100% - 4px - 12px);
+                text-align: center;
+                border: 6px solid white;
+                border-radius: 4px;
+                background-color: #fff;
+                animation: showRound 3s infinite linear;
+            }
+
+            &::after {
+                animation: showRound 3s infinite -1.5s linear;
+                /* insetRound动画 持续3s 无限循环 提前1.5s(负数提前,正数延迟) 匀速播放 */
+            }
+
+            /* 内部的盒子 */
+            .borderShowCenter {
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                width: calc(100% - 4px - 12px);
+                height: calc(100% - 4px - 12px);
+                text-align: center;
+                border-radius: 4px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                color: #fff;
+                background-color: #c073ed;
+                z-index: 10;
+                /* 覆盖伪元素 */
+            }
+        }
+
+        @keyframes showRound {
+
+            /* box-shadow : x轴 y轴 模糊 放大 颜色; */
+            0%,
+            100% {
+                box-shadow: 0px -66px 0px 0px #c073ed;
+                /* 上 */
+            }
+
+            25% {
+                box-shadow: 146px 0px 0px 0px #c073ed;
+                /* 右 */
+            }
+
+            50% {
+                box-shadow: 0px 66px 0px 0px #c073ed;
+                /* 下 */
+            }
+
+            75% {
+                box-shadow: -146px 0px 0px 0px #c073ed;
+                /* 左 */
+            }
+        }
+
+
+        .tab-card {
+            position: relative;
+            padding: 10px 30px;
+            margin: 10px 0;
+            background-color: rgb(2, 29, 65, 0.3);
+            box-shadow: 0 0 50px rgb(13, 53, 95) inset;
+            border-radius: 13px;
+            box-sizing: border-box;
+
+            width: 585px;
+            height: 501px;
+            --tabWidth: 585px;
+            --tabHeight: 501px;
+            --animationDelay: -1s;
+
+            &::after {
+                content: '';
+                box-shadow: inset 0 0 1px 2px rgba(159, 230, 184, 0.7);
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                animation: clipMe 4s linear infinite var(--animationDelay);
+                border-radius: 13px;
+            }
+
+            @keyframes clipMe {
+                0% {
+                    clip: rect(1px, calc(var(--tabWidth) - 3px), 0px, 0px);
+                }
+
+                10% {
+                    clip: rect(1px, calc(var(--tabWidth) / 2 - 3px), calc(var(--tabHeight) / 2 - 5px), 0px);
+                }
+
+                25% {
+                    clip: rect(2px, 2px, calc(var(--tabHeight) - 5px), 0px);
+                }
+
+                50% {
+                    clip: rect(calc(var(--tabHeight) - 3px),
+                            calc(var(--tabWidth) - 3px),
+                            calc(var(--tabHeight) + 2px),
+                            0);
+                }
+
+                75% {
+                    clip: rect(0,
+                            calc(var(--tabWidth) + 2px),
+                            calc(var(--tabHeight) + 2px),
+                            calc(var(--tabWidth) - 2px));
+                }
+
+                100% {
+                    clip: rect(1px, calc(var(--tabWidth) - 3px), 0px, 0px);
+                }
+            }
+
+            &::before {
+                animation-delay: -4s;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="borderShow">
+        <div class="borderShowCenter">按钮</div>
+    </div>
+
+    <div class="tab-card"></div>
+
+</body>
+
+</html>

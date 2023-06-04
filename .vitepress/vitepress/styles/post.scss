@@ -1,0 +1,124 @@
+@use './mixins.scss' as *;
+@use './screen.scss' as *;
+
+html.dark {
+  .home-posts-list {
+    .post-item {
+      background-color: #363636;
+      border: 1px #363636 solid;
+    }
+    .post-info__description {
+      color: #fff;
+    }
+  }
+}
+
+.home-posts-list {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $breakpoint-xlg;
+  margin: 20px auto 0;
+
+  @include respond-to('xlg') {
+    justify-content: space-between;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 50%;
+    }
+  }
+
+  .post-item {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    width: 90%;
+    margin: 0 auto 10px;
+    border: 1px #fff solid;
+
+    @include respond-to('xlg') {
+      width: 100%;
+      flex-direction: row;
+      width: calc(50% - 20px);
+      margin-bottom: 20px;
+
+      &:hover {
+        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .post-img {
+    width: 100%;
+    border-radius: 8px;
+
+    @include respond-to('xlg') {
+      width: 45%;
+    }
+  }
+
+  .post-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    @include respond-to('xlg') {
+      margin-top: 0px;
+      margin-left: 20px;
+    }
+
+    &__title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    &__description {
+      margin: 10px 0;
+      color: #757575;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-size: 14px;
+
+      @include respond-to('xlg') {
+        margin: 0;
+      }
+    }
+
+    .create-date {
+      text-align: right;
+    }
+
+    &__tags {
+      .tag-item {
+        font-size: 14px;
+        padding: 2px 4px;
+        border-radius: 6px;
+        & + .tag-item {
+          margin: 10px;
+        }
+      }
+    }
+  }
+}
+.home-pagination {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+
+  .el-pagination.is-background .el-pager li.is-active {
+    background-color: var(--primary-color);
+  }
+
+  .el-pager li:hover {
+    color: var(--primary-color);
+  }
+}

@@ -1,0 +1,40 @@
+name: guohuiweb3
+
+on:
+  push:
+    branches: # 此处不仅限于监听分支, 还可监听 tag
+      - master
+    paths-ignore: # 下列文件的变更不触发部署，可以自行添加
+      - README.md
+      - LICENSE
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      #  检出代码库
+      - name: Checkout
+        uses: actions/checkout@master
+
+      # 设置Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.16.1
+
+      # 打包构建
+      - name: Build
+        run: |
+          npm install
+          npm run build
+
+      # 上传到服务器
+      - name: Upload
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          # 拷贝 .next、public文件夹和package.json文件到服务器指定目录
+          source: '.vitePress/dist'
+          target: '/data/siteWeb3'

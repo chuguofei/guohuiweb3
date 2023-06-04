@@ -1,0 +1,43 @@
+@use './var.scss' as *;
+@use './custom.scss' as *;
+@use './navbar.scss' as *;
+@use './post.scss' as *;
+@use './mixins.scss' as *;
+@use './groups.scss' as *;
+@use './content.scss' as *;
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: 1.4;
+  font-size: 16px;
+  text-size-adjust: 100%;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: inherit;
+}
+
+.VPImage.logo {
+  height: 45px !important;
+}
+
+.bilibili {
+  height: 200px;
+
+  @include respond-to('xlg') {
+    height: 400px;
+  }
+}

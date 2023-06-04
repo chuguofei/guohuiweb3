@@ -1,0 +1,53 @@
+@use './mixins.scss' as *;
+
+.article-warpper {
+  margin-bottom: 20px;
+
+  .article-title {
+    font-size: 18px;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+
+    @include respond-to('xlg') {
+      font-size: 20px;
+    }
+  }
+
+  .article-info {
+    display: flex;
+
+    .article-block {
+      display: flex;
+      align-items: center;
+      user-select: none;
+      font-size: 14px;
+      color: rgba(60, 60, 67, 0.75);
+
+      @include respond-to('xlg') {
+        font-size: 16px;
+      }
+
+      &__value {
+        margin-left: 10px;
+      }
+    }
+  }
+  .article-tags {
+    margin: 10px 0;
+    .article-tag {
+      background-color: var(--primary-color);
+      color: #fff;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 14px;
+      user-select: none;
+      display: inline-block;
+      margin-bottom: 6px;
+
+      & + .article-tag {
+        margin-left: 6px;
+      }
+    }
+  }
+}
