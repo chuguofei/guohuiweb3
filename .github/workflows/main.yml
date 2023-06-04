@@ -35,5 +35,5 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
-          source: './.vitepress/dist/'
+          source: './.vitepress/dist/*'
           target: '/data/siteWeb3'
