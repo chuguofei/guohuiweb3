@@ -3,7 +3,7 @@ name: guohuiweb3
 on:
   push:
     branches: # 此处不仅限于监听分支, 还可监听 tag
-      - master
+      - main
     paths-ignore: # 下列文件的变更不触发部署，可以自行添加
       - README.md
       - LICENSE
@@ -14,7 +14,7 @@ jobs:
     steps:
       #  检出代码库
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       # 设置Node.js
       - name: Set up Node.js
