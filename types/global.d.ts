@@ -1,3 +1,10 @@
+declare global {
+  interface Window {
+    _hmt: any;
+  }
+}
+export {};
+
 type NavBar = {
   text?: string;
   link?: string;
@@ -6,6 +13,7 @@ type NavBar = {
 type PostHeaderTypes = {
   title: string;
   description: string;
+  public?: boolean;
   date: string;
   cover?: string;
   tags?: Array<string>;

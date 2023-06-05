@@ -3,7 +3,7 @@ title: WEB2已是过去式，拥抱 WEB3
 description: Web2是连接人与信息的里程碑，Web3则是赋予个人数字主权，重塑互联网未来的浪潮。
 date: 2022-06-01
 cover: /images/web3.png
-public: false
+public: true
 tags:
   - web3
   - 去中心化
@@ -53,7 +53,7 @@ Web3 代表着去中心化互联网的新篇章，它赋予用户更多的掌控
 
 - MetaMask 小狐狸钱包
 
-  ![](https://guohuiweb3.oss-cn-beijing.aliyuncs.com/3c6d674e1136cb01168ae28cb73beb2d.jpg?Expires=1685954438&OSSAccessKeyId=TMP.3Ki62XBCNpBpP9ebTFFcgwTWyESC185gRpWreKzfZiL1xpEP2zESgVmXLWAUE1NhMdASNC89GtukU7RFPKpHuZ13G26FL5&Signature=d0zOKzVITbS19Ry4QBpPNt%2Bt7%2FU%3D)
+  ![](https://guohuiweb3site.oss-cn-beijing.aliyuncs.com/3c6d674e1136cb01168ae28cb73beb2d.jpg)
 
   MetaMask（小狐狸），是用于与以太坊区块链进行交互的软件加密货币钱包。 它可以通过浏览器扩展程序或移动应用程序让用户访问其以太坊钱包，与去中心化应用进行交互。
 

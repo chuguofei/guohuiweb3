@@ -4,6 +4,7 @@ import { mdPlugin } from './vitepress/config/plugin';
 import { buildBlogRSS } from './theme/rss';
 import consola from 'consola';
 import chalk from 'chalk';
+import { htmlHead } from './vitepress/utils/head';
 
 // https://vitepress.dev/reference/site-config
 export const config: () => Promise<UserConfig> = async () => {
@@ -11,39 +12,9 @@ export const config: () => Promise<UserConfig> = async () => {
 
   return {
     title: 'GuoHuiWEB3',
-    description: '我的站点',
+    description: 'GuoHui站点',
     ignoreDeadLinks: true,
-    head: [
-      [
-        'link',
-        {
-          rel: 'icon',
-          type: 'image/png',
-          href: '/logo.png',
-        },
-      ],
-      [
-        'meta',
-        {
-          name: 'author',
-          content: 'GuoHui',
-        },
-      ],
-      [
-        'meta',
-        {
-          property: 'og:title',
-          content: 'Home',
-        },
-      ],
-      [
-        'meta',
-        {
-          property: 'og:description',
-          content: 'Home of GuoHui',
-        },
-      ],
-    ],
+    head: htmlHead,
     lastUpdated: false,
     themeConfig: {
       logo: 'logo.png',

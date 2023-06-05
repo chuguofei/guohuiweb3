@@ -1,5 +1,8 @@
 {
   "name": "guohuiweb3",
+  "version": "1.0.0",
+  "private": true,
+  "description": "个人博客",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
@@ -35,5 +38,12 @@
     "stylelint-order": "^4.1.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chuguofei/guohuiweb3.git"
+  },
+  "keywords": [],
+  "author": "guohui",
+  "license": "MIT"
 }

@@ -28,16 +28,23 @@ function postTransforms(paths) {
   const result = paths.map((path) => {
     const fileContent = fs.readFileSync(path, 'utf-8');
     const { data, content } = matter(fileContent);
-    data.date = dayjs(data.date).format('YYYY-MM-DD');
-    return {
-      info: data,
-      content,
-      hrefPath: `/${path.replace('.md', '.html')}`,
-    };
+    if (
+      (Reflect.has(data, 'public') && data.public == true) ||
+      !Reflect.has(data, 'public')
+    ) {
+      data.date = dayjs(data.date).format('YYYY-MM-DD');
+      return {
+        info: data,
+        content,
+        hrefPath: `/${path.replace('.md', '.html')}`,
+      };
+    } else {
+      return null;
+    }
   });
-  return result.sort((a, b) =>
-    new Date(a.info.date) < new Date(b.info.date) ? 1 : -1
-  );
+  return result
+    .filter(Boolean)
+    .sort((a, b) => (new Date(a.info.date) < new Date(b.info.date) ? 1 : -1));
 }
 
 // 合集文章
