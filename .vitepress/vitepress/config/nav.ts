@@ -5,7 +5,7 @@ const getNarBar = () => {
       link: '/',
     },
     {
-      text: '集合列表',
+      text: '🚀 集合列表',
       link: '/group',
     },
     {
