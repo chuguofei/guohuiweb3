@@ -9,7 +9,11 @@ const { frontmatter } = useData();
 const cover = computed(() => frontmatter.value.cover);
 
 const getUrl = computed(() => {
-  return cover.value.startsWith('http') ? cover.value : `/${cover.value}`;
+  return cover.value.startsWith('http')
+    ? cover.value
+    : cover.value[0] == '/'
+    ? cover.value
+    : `/${cover.value}`;
 });
 </script>
 

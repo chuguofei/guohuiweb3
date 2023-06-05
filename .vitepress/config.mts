@@ -50,6 +50,10 @@ export const config: () => Promise<UserConfig> = async () => {
       search: {
         provider: 'local',
       },
+      outline: {
+        level: [2, 6],
+        label: '目录',
+      },
       footer: {
         message:
           '<a target="_blank" href="https://theme.sugarat.top/">京ICP备2023013710号</a>',
