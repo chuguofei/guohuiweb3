@@ -44,7 +44,7 @@ function postTransforms(paths) {
   });
   return result
     .filter(Boolean)
-    .sort((a, b) => (new Date(a.info.date) < new Date(b.info.date) ? 1 : -1));
+    .sort((a, b) => (new Date(a.info.date) > new Date(b.info.date) ? 1 : -1));
 }
 
 // 合集文章
@@ -53,6 +53,7 @@ function getGroupArticle(posts: Array<PostsTypes>) {
   try {
     const groups = posts
       .filter((post) => post.info.group)
+      .sort((a, b) => (new Date(a.info.date) < new Date(b.info.date) ? 1 : -1))
       .sort((a, b) => ((a.info.sort ?? 0) > (b.info!.sort ?? 0) ? 1 : -1));
     groups.forEach((post) => {
       const { group } = post.info;
