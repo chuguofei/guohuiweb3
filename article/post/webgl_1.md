@@ -4,7 +4,7 @@ description: 如何使用webgl创建点线面，uv贴图等
 date: 2022-06-08
 cover: https://guohuiweb3site.oss-cn-beijing.aliyuncs.com/6%E6%9C%885%E6%97%A5.png
 
-public: true
+public: false
 
 tags:
   - webgl
