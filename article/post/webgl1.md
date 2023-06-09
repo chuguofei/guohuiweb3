@@ -35,13 +35,13 @@ gl.vertexAttribPointer(positionLoc, numComponents, type, false, stride, offset);
 gl.enableVertexAttribArray(positionLoc);
 ```
 
-# Webgl 传值的 3 种方式
+## Webgl 传值的 3 种方式
 
 ### attribute 只能在顶点作色器中使用
 
 一般用 attribute 变量来表示一些顶点的数据，如：顶点坐标，法线，纹理坐标，顶点颜色等。
 
-```js
+```javascript
 let vertexShader = `
                 attribute vec2 a_position;
 
@@ -68,7 +68,7 @@ gl.vertexAttrib2f(aPosition, 0.5, 0.5);
 > uniform mat4 viewMatrix; //视图矩阵
 > uniform vec3 lightPosition; //光源位置
 
-```js
+```javascript
 let vertexShader = `
                 attribute vec2 a_position;
 
@@ -92,7 +92,7 @@ gl.uniform3f(uColor, 0.0, 0.0, 0.0);
 
 ### varying ， 可以将顶点作色器的数据传入到片源着色器中
 
-```js
+```javascript
 let vertexShader = `
                 attribute vec2 a_position;
                 attribute vec3 a_color; 
@@ -113,28 +113,23 @@ let fragShader = `
 `;
 ```
 
-```JS
-
+```javascript
 // 第一种 （attribute）， 只能在顶点作色器中使用
 let aPosition = gl.getAttribLocation(gl.program, 'a_position');
 // 表示要传入2为为向量
 gl.vertexAttrib2f(aPosition, 1.0, 1.0);
 gl.vertexAttrib3f(aPosition, 1.0, 1.0, 1.0);
 
-
-
 // 第二种 （uniform）, 顶点作色器 和 片源着色器 都可以使用
 let uColor = gl.getUniformLocation(gl.program, 'a_color');
-gl.uniform3f(uColor, 0.0, 0.0 , 0.0);
+gl.uniform3f(uColor, 0.0, 0.0, 0.0);
 
 // 第三种 （varying）, 可以将顶点作色器的数据传入到片源着色器中
-
-
 ```
 
-# 将矩形点从像素转换为 0.0 到 1.0
+## 将矩形点从像素转换为 0.0 到 1.0
 
-```js
+```javascript
 let vertexSource = `
 
         attribute vec2 a_position;
@@ -153,9 +148,9 @@ var resolutionLocation = gl.getUniformLocation(gl.program, 'u_resolution');
 gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
 ```
 
-# 画一个三角形
+## 画一个三角形
 
-```js
+```javascript
   <script>
         var gl;
 
@@ -278,7 +273,7 @@ gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
     </script>
 ```
 
-# 绘制一个圆
+## 绘制一个圆
 
 ```js
 let arr = [];
@@ -295,11 +290,11 @@ for (let i = 0; i < POINTS; i++) {
 }
 ```
 
-# UV 贴图
+## UV 贴图
 
 WebGL 对纹理图片大小是有要求的，图片的宽度和高度必须是**2 的 N 次幂**，比如 16 x 16，32 x 32，32 x 64 等。实际上，不是这个尺寸的图片也能进行贴图，但是这样不仅会增加更多的处理，还会影响性能。
 
-```js
+```javascript
 import aaaJpg from "/imgs/cat_512x512.jpg";
 
 const loadShader = (gl, type, source): WebGLShader | null => {
@@ -379,7 +374,7 @@ export const initTextures = (gl: WEBGL, callBack) => {
 
 ```
 
-```js
+```javascript
   const gl = box.value!.getContext("webgl") as WEBGL;
     let vertexSource = `
     attribute vec3 a_position;
@@ -440,11 +435,11 @@ export const initTextures = (gl: WEBGL, callBack) => {
     });
 ```
 
-# js-matrix 使用
+## js-matrix 使用
 
-## 缩放
+### 缩放
 
-```js
+```javascript
 let vertexSource = `
         attribute vec3 a_position;
 
@@ -469,7 +464,7 @@ let uMatrix = gl.getUniformLocation(gl.program, 'u_matrix');
 gl.uniformMatrix4fv(uMatrix, false, new Float32Array(scaleMatrix));
 ```
 
-## 平移
+### 平移
 
 ```js
 const translationMatrix = mat4.create();
@@ -479,9 +474,9 @@ let uMatrix = gl.getUniformLocation(gl.program, 'u_matrix');
 gl.uniformMatrix4fv(uMatrix, false, new Float32Array(translationMatrix));
 ```
 
-## 旋转
+### 旋转
 
-```js
+```javascript
 import { mat4, glMatrix } from 'gl-matrix';
 
 // glMatrix.toRadian(180) ==  (45 * Math.PI) / 180
@@ -492,7 +487,7 @@ let uMatrix = gl.getUniformLocation(gl.program, 'u_matrix');
 gl.uniformMatrix4fv(uMatrix, false, new Float32Array(rotationMatrix));
 ```
 
-## 多个矩阵变化
+### 多个矩阵变化
 
 ```js
 let vertexSource = `
@@ -525,7 +520,7 @@ gl.uniformMatrix4fv(rMatrix, false, new Float32Array(rotationMatrix));
 
 ## 全部代码
 
-```js
+```javascript
 const gl = box.value!.getContext("webgl") as WEBGL;
     let vertexSource = `
         attribute vec3 a_position;
