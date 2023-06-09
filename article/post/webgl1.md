@@ -11,7 +11,7 @@ tags:
   - js
 ---
 
-# Webgl
+## Webgl
 
 WebGL 每次绘制需要两个着色器， 一个**顶点着色器**和一个**片段着色器**，每一个着色器都是一个**方法**。 一个顶点着色器和一个片段着色器链接在一起放入一个着色程序中（或者只叫程序）。 一个典型的 WebGL 应用会有多个着色程序。
 
@@ -19,7 +19,7 @@ Shader 中的数据类型有`loat`, `vec2`, `vec3`, `vec4`, `mat2`, `mat3` 和 `
 
 ## 如何给 shader 传递数据
 
-```js
+```javascript
 var numComponents = 3; // (x, y, z)
 var type = gl.FLOAT; // 32位浮点数据
 var normalize = false; // 不标准化
@@ -151,46 +151,45 @@ gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
 ## 画一个三角形
 
 ```javascript
-  <script>
-        var gl;
+var gl;
 
-        function initShaders(gl, vsSource, fsSource) {
-            //创建程序对象
-            const program = gl.createProgram();
-            //建立着色对象
-            const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
-            const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
-            //把顶点着色对象装进程序对象中
-            gl.attachShader(program, vertexShader);
-            //把片元着色对象装进程序对象中
-            gl.attachShader(program, fragmentShader);
-            //连接webgl上下文对象和程序对象
-            gl.linkProgram(program);
-            //启动程序对象
-            gl.useProgram(program);
-            //将程序对象挂到上下文对象上
-            gl.program = program;
-            return true;
-        }
-        function loadShader(gl, type, source) {
-            //根据着色类型，建立着色器对象
-            const shader = gl.createShader(type);
-            //将着色器源文件传入着色器对象中
-            gl.shaderSource(shader, source);
-            //编译着色器对象
-            gl.compileShader(shader);
-            //返回着色器对象
-            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                var info = gl.getShaderInfoLog(shader);
-                throw "Could not compile WebGL program. \n\n" + info;
-            }
-            return shader;
-        }
-        window.onload = function () {
-            let canvas = document.getElementById('canvas');
-            gl = canvas.getContext('webgl');
-            gl.viewport(0, 0, canvas.width, canvas.height)
-            let vertexShader = `
+function initShaders(gl, vsSource, fsSource) {
+  //创建程序对象
+  const program = gl.createProgram();
+  //建立着色对象
+  const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+  const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+  //把顶点着色对象装进程序对象中
+  gl.attachShader(program, vertexShader);
+  //把片元着色对象装进程序对象中
+  gl.attachShader(program, fragmentShader);
+  //连接webgl上下文对象和程序对象
+  gl.linkProgram(program);
+  //启动程序对象
+  gl.useProgram(program);
+  //将程序对象挂到上下文对象上
+  gl.program = program;
+  return true;
+}
+function loadShader(gl, type, source) {
+  //根据着色类型，建立着色器对象
+  const shader = gl.createShader(type);
+  //将着色器源文件传入着色器对象中
+  gl.shaderSource(shader, source);
+  //编译着色器对象
+  gl.compileShader(shader);
+  //返回着色器对象
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    var info = gl.getShaderInfoLog(shader);
+    throw 'Could not compile WebGL program. \n\n' + info;
+  }
+  return shader;
+}
+window.onload = function () {
+  let canvas = document.getElementById('canvas');
+  gl = canvas.getContext('webgl');
+  gl.viewport(0, 0, canvas.width, canvas.height);
+  let vertexShader = `
                 attribute vec2 a_position;
                 attribute vec3 a_color;
                 varying vec3 v_color;
@@ -201,76 +200,67 @@ gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
                     gl_PointSize = 10.0;
                 }
             `;
-            let fragShader = `
+  let fragShader = `
                 precision mediump float;
                 varying vec3 v_color;
                 void main(){
                     gl_FragColor = vec4(v_color, 1.0);
                 }
             `;
-            initShaders(gl, vertexShader, fragShader);
+  initShaders(gl, vertexShader, fragShader);
 
+  let arr = [
+    //  x  y  r  g  b
+    0.0, 0.5, 1.0, 0.0, 0.0, -0.5, -0.5, 0.0, 1.0, 0.0, 0.5, -0.5, 0.0, 0.0, 1.0,
+  ];
 
-            let arr = [
-                //  x  y  r  g  b
-                0.0, 0.5, 1.0, 0.0, 0.0,
-                -0.5, -0.5, 0.0, 1.0, 0.0,
-                0.5, -0.5, 0.0, 0.0, 1.0,
-            ]
+  let dataArr = new Float32Array(arr);
+  let FSIZE = dataArr.BYTES_PER_ELEMENT;
 
-            let dataArr = new Float32Array(arr);
-            let FSIZE = dataArr.BYTES_PER_ELEMENT;
+  // 创建buffer
+  let buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, dataArr, gl.STATIC_DRAW);
+  // 将数据传入 webgl
+  // 获取webgl中的要获取的变量
+  let aPosition = gl.getAttribLocation(gl.program, 'a_position');
+  /**
+   *  参数1：表示在webgl中要赋值的对象
+   *  参数2：表示attribute变量的长度 （vec2 、 vec4）
+   *  参数3：buffer里面数据的类型，表示要用浮点数
+   *  参数4：normalized: 正交化 true/false
+   *  参数5：每个点所占的BYTES， 表示每5个数据为一组
+   *  参数6：从第几个BYTES开始数
+   */
+  gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 5 * FSIZE, 0);
 
-            // 创建buffer
-            let buffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-            gl.bufferData(gl.ARRAY_BUFFER, dataArr, gl.STATIC_DRAW);
-            // 将数据传入 webgl
-            // 获取webgl中的要获取的变量
-            let aPosition = gl.getAttribLocation(gl.program, 'a_position');
-            /**
-             *  参数1：表示在webgl中要赋值的对象
-             *  参数2：表示attribute变量的长度 （vec2 、 vec4）
-             *  参数3：buffer里面数据的类型，表示要用浮点数
-             *  参数4：normalized: 正交化 true/false
-             *  参数5：每个点所占的BYTES， 表示每5个数据为一组
-             *  参数6：从第几个BYTES开始数
-             */
-            gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 5 * FSIZE, 0);
+  let aColor = gl.getAttribLocation(gl.program, 'a_color');
+  /**
+   *  参数1：表示在webgl中要赋值的对象
+   *  参数2：表示每个颜色要占用数组中的3个数据
+   *  参数3：表示要用浮点数
+   *  参数4：normalized: 正交化 true/false
+   *  参数5：每个点所占的BYTES， 表示每5个数据为一组
+   *  参数6：从第几个BYTES开始数，从第下标为2的数据开始，占用3个字节
+   */
+  gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 5 * FSIZE, 2 * FSIZE);
 
+  // 确定把数据传入
+  gl.enableVertexAttribArray(aPosition);
+  gl.enableVertexAttribArray(aColor);
 
-            let aColor = gl.getAttribLocation(gl.program, 'a_color');
-            /**
-             *  参数1：表示在webgl中要赋值的对象
-             *  参数2：表示每个颜色要占用数组中的3个数据
-             *  参数3：表示要用浮点数
-             *  参数4：normalized: 正交化 true/false
-             *  参数5：每个点所占的BYTES， 表示每5个数据为一组
-             *  参数6：从第几个BYTES开始数，从第下标为2的数据开始，占用3个字节
-             */
-            gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 5 * FSIZE, 2 * FSIZE);
-
-
-            // 确定把数据传入
-            gl.enableVertexAttribArray(aPosition);
-            gl.enableVertexAttribArray(aColor);
-
-
-			gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-            gl.clearColor(0.0, 0.0, 0.0, 1.0);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-            /**
-             *  开始绘制
-             *  参数1： 绘制类型
-             *  参数2： 从哪个点开始绘制
-             *  参数3： 绘制几个点
-             **/
-            gl.drawArrays(gl.POINTS, 0, 3);
-            gl.drawArrays(gl.TRIANGLES, 0, 3);
-
-        }
-
-    </script>
+  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  /**
+   *  开始绘制
+   *  参数1： 绘制类型
+   *  参数2： 从哪个点开始绘制
+   *  参数3： 绘制几个点
+   **/
+  gl.drawArrays(gl.POINTS, 0, 3);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+};
 ```
 
 ## 绘制一个圆
