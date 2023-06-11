@@ -13,7 +13,6 @@ const previewImageInfo = reactive<{ url: string; list: string[]; idx: number }>(
 const previewImage = (e: Event) => {
   const target = e.target as HTMLElement;
   const url = target.getAttribute('src');
-  if (!url?.startsWith('http')) return;
 
   const currentTarget = e.currentTarget as HTMLElement;
   if (target.tagName.toLowerCase() === 'img') {
@@ -23,9 +22,13 @@ const previewImage = (e: Event) => {
     const idx = Array.from(imgs).findIndex((el) => el === target);
     const urls = Array.from(imgs).map((el) => el.src);
 
+    if (idx === -1) return;
+
     previewImageInfo.url = url!;
     previewImageInfo.list = urls;
     previewImageInfo.idx = idx;
+
+    console.error(imgs);
 
     document.body.setAttribute('style', 'overflow: hidden;');
 

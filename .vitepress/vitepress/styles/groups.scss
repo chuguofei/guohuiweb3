@@ -45,6 +45,13 @@ $section: 'section';
     &:hover {
       color: var(--primary-color);
       transform: scale(1.1);
+
+      @include respond-to('xlg') {
+        .sequence {
+          background-color: var(--primary-color);
+          color: #fff;
+        }
+      }
     }
 
     .sequence {
@@ -52,12 +59,14 @@ $section: 'section';
       top: 0;
       left: 0;
       display: inline-block;
-      padding: 4px 10px;
+      padding: 4px 8px;
       font-size: 12px;
       text-align: center;
       color: #ffffff;
       font-weight: bold;
-      background-color: rgba(0, 0, 0, 1);
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 100;
+      transition: all 0.35s linear;
     }
 
     .title {
@@ -69,9 +78,14 @@ $section: 'section';
 
   .#{$section}-item__img_warpper {
     position: relative;
-    width: 100%;
     overflow: hidden;
     border-radius: 10px;
+    width: 100%;
+
+    @include respond-to('xlg') {
+      width: 100%;
+      height: 150px;
+    }
 
     &:hover > .description {
       bottom: 0;
@@ -91,7 +105,7 @@ $section: 'section';
       text-overflow: ellipsis;
       overflow: hidden;
       transition: all 0.25s;
-      transition-delay: 0.2s;
+      // transition-delay: 0.2s;
     }
 
     .#{$section}-item__img {

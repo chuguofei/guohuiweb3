@@ -97,17 +97,30 @@ html.dark {
     }
 
     &__tags {
-      .tag-item {
-        font-size: 14px;
-        padding: 2px 4px;
-        border-radius: 6px;
-        & + .tag-item {
-          margin: 10px;
-        }
+      display: block;
+
+      @include respond-to('xlg') {
+        display: none;
       }
     }
   }
 }
+
+.tag-item {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 14px;
+  user-select: none;
+  display: inline-block;
+  margin-bottom: 8px;
+
+  & + .tag-item {
+    margin-left: 6px;
+  }
+}
+
 .home-pagination {
   display: flex;
   justify-content: center;

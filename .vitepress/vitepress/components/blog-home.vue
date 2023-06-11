@@ -12,13 +12,13 @@
         <div class="post-info__description" v-if="post.info.description">
           {{ post.info.description }}
         </div>
-        <!-- <div class="post-info__tags">
+        <div class="post-info__tags">
           <span
             class="tag-item"
             v-for="tag in post.info.tags"
             v-text="tag"
           ></span>
-        </div> -->
+        </div>
         <div class="create-date">{{ post.info.date }}</div>
       </div>
     </a>
