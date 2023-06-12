@@ -33,6 +33,7 @@ export const config: () => Promise<UserConfig> = async () => {
       nav,
       posts,
       group,
+      socialLinks: [{ icon: 'github', link: 'https://github.com/chuguofei' }],
     },
     markdown: {
       config: (md) => mdPlugin(md),

@@ -14,15 +14,6 @@ export default defineConfig(({ mode }) => {
           find: '~/',
           replacement: `${path.resolve(__dirname, './.vitepress/vitepress')}/`,
         },
-        // {
-        //   find: /^.*\/VPNavBar\.vue$/,
-        //   replacement: fileURLToPath(
-        //     new URL(
-        //       './.vitepress/vitepress/components/blog-navbar.vue',
-        //       import.meta.url
-        //     )
-        //   ),
-        // },
       ],
       extensions: ['.mjs', '.js', '.json', '.ts'],
     },

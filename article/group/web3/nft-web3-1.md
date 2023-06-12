@@ -229,7 +229,17 @@ yarn hardhat run scripts/deploy.js --network localhost
 
 ## 在 小狐狸钱包上 创建一个本地以太网
 
+- 网络名称：指您喜欢为区块链网络提供的别名。
+- New RPC URL：指向可以访问区块链服务的 HTTP 端点，它包括区块链服务器的主机和端口。
+- Chain Id：指定特定区块链网络的唯一标识号，对于 Hardhat 服务器，它始终为 31337。
+- 货币符号：表示特定区块链网络中使用的加密货币的种类。
+
 ![](https://guohuiweb3site.oss-cn-beijing.aliyuncs.com/mark-localhost.png)
+
+### 导入账户
+
+将 hardhat 生成得密匙导入到 小狐狸钱包种，就可以看到在测试网络得账户有 1,000 ETH 余额。
+![](https://guohuiweb3site.oss-cn-beijing.aliyuncs.com/e64462b3ccd3a435078ce0632068c8f.png)
 
 ## 完成部署
 
